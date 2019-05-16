@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'campaigns-add' %}">add campaign</a></p>
+
+{% if not user.is_authenticated %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <p><a href="{% url 'signup' %}">register</a></p>
+{% endif %}
+{% endblock %}
