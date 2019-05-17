@@ -19,6 +19,9 @@ def add(request):
     if request.method == 'POST':
         form = CampaignForm(request.POST, request.FILES)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.status = request.user
             form.save()
             messages.add_message(request, messages.INFO, 'Campaign saved')
             return index(request)
