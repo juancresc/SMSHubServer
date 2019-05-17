@@ -6,6 +6,23 @@
 </head>
 <body>
   <main>
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+    {% if errors %}
+    <ul class="messages">
+        {% for field, messages in errors.items %}
+        <li class="error">{{ field }}: </li>
+          {% for message in messages %}
+              {{ message }}
+          {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% if user.is_authenticated %}
     <p>
         <a href="{% url 'campaigns:index' %}">Campaigns</a> | 

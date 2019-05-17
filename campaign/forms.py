@@ -1,7 +1,7 @@
-from campaign.models import *
+from campaign.models import Campaign
 from django.forms import ModelForm
 
 class CampaignForm(ModelForm):
     class Meta:
         model = Campaign
-        fields = ['name','datetime_start']
+        exclude = ['status', 'user']
