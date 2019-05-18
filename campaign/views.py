@@ -1,9 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.utils.safestring import mark_safe
 from .forms import *
-import json
-from campaign.models import Campaign
+from campaign.models import Campaign, CampaignStatus, CampaignStatusChange
 from django.contrib import messages
 
 @login_required
@@ -21,7 +19,7 @@ def add(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.user = request.user
-            form.status = request.user
+            form.status = CampaignStatus.objects.get(name='Pending')
             form.save()
             messages.add_message(request, messages.INFO, 'Campaign saved')
             return index(request)
